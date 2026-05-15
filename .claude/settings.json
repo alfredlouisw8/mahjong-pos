@@ -1,0 +1,20 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(npm install *)",
+      "Bash(npx shadcn@latest init -y --force)",
+      "Bash(npx shadcn@latest init --force)",
+      "Bash(npx shadcn@latest add button input textarea select checkbox switch dialog sheet table tabs badge card separator skeleton scroll-area dropdown-menu calendar popover progress command slider --yes)",
+      "Bash(npx shadcn@latest add toast --yes)",
+      "Bash(npx tsc *)",
+      "Bash(node -e \"const p = require\\('./node_modules/react-day-picker/package.json'\\); console.log\\(p.version\\)\")",
+      "Bash(node -e \"const t = require\\('./node_modules/react-day-picker/dist/cjs/index.js'\\); console.log\\(Object.keys\\(t\\).filter\\(k => k.includes\\('ClassNames'\\) || k.includes\\('classNames'\\)\\)\\)\")",
+      "Bash(npm run *)",
+      "Bash(xargs sed -i 's/RouteContext</DynContext</g')",
+      "Bash(node -e \"console.log\\(require\\('crypto'\\).randomBytes\\(48\\).toString\\('base64'\\)\\)\")",
+      "Bash(node -e \"const b = require\\('bcryptjs'\\); ['1111','2222','3333'].forEach\\(p => console.log\\(p, b.hashSync\\(p, 12\\)\\)\\)\")",
+      "Read(//d/Alfred/coding/projects/mahjong-royale/**)",
+      "Bash(xargs grep -l -i \"middleware\")"
+    ]
+  }
+}
