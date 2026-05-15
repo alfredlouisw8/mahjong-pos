@@ -1,21 +1,21 @@
-import Link from "next/link"
-import { ArrowLeft } from "lucide-react"
+import { createAuthClient } from "@/lib/supabase/auth-server"
+import { PosSidebar } from "@/components/layout/PosSidebar"
 import { PosBottomNav } from "@/components/layout/PosBottomNav"
+import { PosGuard } from "@/components/layout/PosGuard"
 
-export default function PosLayout({ children }: { children: React.ReactNode }) {
+export default async function PosLayout({ children }: { children: React.ReactNode }) {
+  const supabase = await createAuthClient()
+  const { data: { user } } = await supabase.auth.getUser()
+  const isAdmin = !!user
+
   return (
-    <div className="min-h-screen bg-[#0a120e] pb-16 md:pb-0">
-      <header className="flex items-center px-4 py-3 border-b border-[rgba(255,255,255,0.08)]">
-        <Link
-          href="/admin"
-          className="flex items-center gap-1.5 text-sm text-[rgba(254,249,236,0.5)] hover:text-[#fef9ec] transition-colors"
-        >
-          <ArrowLeft size={16} />
-          Admin
-        </Link>
-      </header>
-      {children}
-      <PosBottomNav />
+    <div className="flex min-h-screen bg-[#0a120e]">
+      <PosSidebar isAdmin={isAdmin} />
+      <PosGuard isAdmin={isAdmin} />
+      <div className="flex-1 pb-16 md:pb-0 overflow-auto">
+        {children}
+      </div>
+      <PosBottomNav isAdmin={isAdmin} />
     </div>
   )
 }

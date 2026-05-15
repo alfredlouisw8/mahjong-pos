@@ -1,7 +1,7 @@
 "use client"
 
 import { useQuery, useQueryClient } from "@tanstack/react-query"
-import { useEffect } from "react"
+import { useEffect, useId } from "react"
 import { createClient } from "@/lib/supabase/client"
 import { toast } from "sonner"
 import type { Order } from "@/types/database"
@@ -9,6 +9,7 @@ import type { Order } from "@/types/database"
 export function useOrders(sessionId: string | null) {
   const queryClient = useQueryClient()
   const supabase = createClient()
+  const uid = useId()
 
   const query = useQuery<Order[]>({
     queryKey: ["orders", sessionId],
@@ -25,7 +26,7 @@ export function useOrders(sessionId: string | null) {
     if (!sessionId) return
 
     const channel = supabase
-      .channel(`orders-${sessionId}`)
+      .channel(`orders-${sessionId}-${uid}`)
       .on(
         "postgres_changes",
         { event: "INSERT", schema: "public", table: "orders", filter: `session_id=eq.${sessionId}` },
@@ -47,7 +48,7 @@ export function useOrders(sessionId: string | null) {
       .subscribe()
 
     return () => { supabase.removeChannel(channel) }
-  }, [sessionId, queryClient, supabase])
+  }, [sessionId, queryClient, supabase, uid])
 
   return query
 }

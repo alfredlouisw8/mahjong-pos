@@ -3,7 +3,7 @@
 import Link from "next/link"
 import { usePathname } from "next/navigation"
 import { cn } from "@/lib/utils"
-import { Square, ShoppingCart, CalendarDays, Clock } from "lucide-react"
+import { Square, ShoppingCart, CalendarDays, Clock, ArrowLeft } from "lucide-react"
 
 const navItems = [
   { href: "/pos/tables", icon: Square, label: "Tables" },
@@ -12,7 +12,7 @@ const navItems = [
   { href: "/pos/shift", icon: Clock, label: "Shift" },
 ]
 
-export function PosBottomNav() {
+export function PosBottomNav({ isAdmin }: { isAdmin: boolean }) {
   const pathname = usePathname()
 
   return (
@@ -34,6 +34,15 @@ export function PosBottomNav() {
             </Link>
           )
         })}
+        {isAdmin && (
+          <Link
+            href="/admin"
+            className="flex flex-col items-center gap-1 py-3 px-4 text-xs text-[rgba(254,249,236,0.5)] hover:text-[#fef9ec] transition-colors"
+          >
+            <ArrowLeft size={20} />
+            Admin
+          </Link>
+        )}
       </div>
     </nav>
   )
