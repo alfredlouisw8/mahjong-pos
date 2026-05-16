@@ -119,7 +119,7 @@ export function BillModal({ session, tableLabel, currencySymbol, onClose }: Bill
                   {pendingOrders.map((o) => (
                     <div key={o.id} className="flex items-center gap-2 bg-orange-500/10 rounded-lg p-2">
                       <span className="text-xs">📱</span>
-                      <span className="flex-1">{(o.menu_items as any)?.name} × {o.quantity}</span>
+                      <span className="flex-1">{o.menu_items?.name} × {o.quantity}</span>
                       <Button size="sm" className="h-6 text-xs bg-[#10b981]/20 text-[#10b981] border border-[#10b981]/30 hover:bg-[#10b981]/30" onClick={() => confirmOrder.mutate(o.id)}>Confirm</Button>
                       <Button size="sm" className="h-6 text-xs bg-[#f43f5e]/20 text-[#f43f5e] border border-[#f43f5e]/30 hover:bg-[#f43f5e]/30" onClick={() => cancelOrder.mutate(o.id)}>Cancel</Button>
                     </div>
@@ -136,7 +136,7 @@ export function BillModal({ session, tableLabel, currencySymbol, onClose }: Bill
                     <div key={o.id} className="flex justify-between">
                       <span className="flex items-center gap-1">
                         {o.source === "customer_qr" && <span className="text-xs">📱</span>}
-                        {(o.menu_items as any)?.name} × {o.quantity}
+                        {o.menu_items?.name} × {o.quantity}
                       </span>
                       <span className="font-tabular">{fmtMoney(o.unit_price * o.quantity, currencySymbol)}</span>
                     </div>

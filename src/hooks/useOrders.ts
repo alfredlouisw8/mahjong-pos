@@ -4,14 +4,14 @@ import { useQuery, useQueryClient } from "@tanstack/react-query"
 import { useEffect, useId } from "react"
 import { createClient } from "@/lib/supabase/client"
 import { toast } from "sonner"
-import type { Order } from "@/types/database"
+import type { Order, OrderWithMenuItem } from "@/types/database"
 
 export function useOrders(sessionId: string | null) {
   const queryClient = useQueryClient()
   const supabase = createClient()
   const uid = useId()
 
-  const query = useQuery<Order[]>({
+  const query = useQuery<OrderWithMenuItem[]>({
     queryKey: ["orders", sessionId],
     queryFn: async () => {
       if (!sessionId) return []

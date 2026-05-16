@@ -1,10 +1,10 @@
 import { forwardRef } from "react";
 import { fmtDate, fmtMoney } from "@/lib/formatters";
-import type { Session, Order } from "@/types/database";
+import type { Session, OrderWithMenuItem } from "@/types/database";
 
 interface ReceiptTemplateProps {
 	session: Session;
-	orders: Order[];
+	orders: OrderWithMenuItem[];
 	tableLabel: string;
 	tableCharge: number;
 	currencySymbol: string;
@@ -95,7 +95,7 @@ export const ReceiptTemplate = forwardRef<HTMLDivElement, ReceiptTemplateProps>(
 								style={{ display: "flex", justifyContent: "space-between" }}
 							>
 								<span>
-									{(o.menu_items as any)?.name ?? "Item"} × {o.quantity}
+									{o.menu_items?.name ?? "Item"} × {o.quantity}
 								</span>
 								<span>
 									{fmtMoney(o.unit_price * o.quantity, currencySymbol)}

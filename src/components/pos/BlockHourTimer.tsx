@@ -17,7 +17,7 @@ export function BlockHourTimer({ session, currencySymbol = "Rp", compact }: Bloc
       session.start_time,
       session.block_ends_at!,
       session.hourly_rate,
-      session.blocks_purchased
+      session.blocks_purchased ?? 1
     )
   )
 
@@ -27,7 +27,7 @@ export function BlockHourTimer({ session, currencySymbol = "Rp", compact }: Bloc
         session.start_time,
         session.block_ends_at!,
         session.hourly_rate,
-        session.blocks_purchased
+        session.blocks_purchased ?? 1
       ))
     }, 1000)
     return () => clearInterval(interval)

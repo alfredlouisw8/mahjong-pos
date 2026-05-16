@@ -8,7 +8,7 @@ import { BlockHourTimer } from "./BlockHourTimer"
 import { PerMinuteTimer } from "./PerMinuteTimer"
 import { BillModal } from "./BillModal"
 import { ExtendBlockDialog } from "./ExtendBlockDialog"
-import type { Table } from "@/types/database"
+import type { TableWithSession } from "@/types/database"
 
 const STATUS_STYLES: Record<string, string> = {
   available: "border-[rgba(16,185,129,0.3)] bg-[rgba(16,185,129,0.05)]",
@@ -25,7 +25,7 @@ const STATUS_DOT: Record<string, string> = {
 }
 
 interface TableCardProps {
-  table: Table
+  table: TableWithSession
   currencySymbol?: string
   billingMode?: string
 }

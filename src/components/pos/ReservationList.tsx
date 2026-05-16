@@ -127,7 +127,7 @@ export function ReservationList() {
                 <p className="text-xs text-[rgba(254,249,236,0.5)]">
                   Party of {r.party_size}
                   {r.phone && ` · ${r.phone}`}
-                  {(r.tables as any)?.label && ` · ${(r.tables as any).label}`}
+                  {r.tables?.label && ` · ${r.tables.label}`}
                 </p>
                 {r.notes && <p className="text-xs text-[rgba(254,249,236,0.4)] mt-0.5 italic">{r.notes}</p>}
               </div>

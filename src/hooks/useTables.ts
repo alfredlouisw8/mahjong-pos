@@ -3,13 +3,13 @@
 import { useQuery, useQueryClient } from "@tanstack/react-query"
 import { useEffect } from "react"
 import { createClient } from "@/lib/supabase/client"
-import type { Table } from "@/types/database"
+import type { TableWithSession } from "@/types/database"
 
 export function useTables() {
   const queryClient = useQueryClient()
   const supabase = createClient()
 
-  const query = useQuery<Table[]>({
+  const query = useQuery<TableWithSession[]>({
     queryKey: ["tables"],
     queryFn: async () => {
       const res = await fetch("/api/tables")

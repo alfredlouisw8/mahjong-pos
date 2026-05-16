@@ -1,10 +1,10 @@
 "use client"
 
 import { useQuery } from "@tanstack/react-query"
-import type { Reservation } from "@/types/database"
+import type { ReservationWithTable } from "@/types/database"
 
 export function useReservations(status?: string) {
-  return useQuery<Reservation[]>({
+  return useQuery<ReservationWithTable[]>({
     queryKey: ["reservations", status],
     queryFn: async () => {
       const params = status ? `?status=${status}` : ""
